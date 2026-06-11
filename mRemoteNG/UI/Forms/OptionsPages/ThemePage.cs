@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using mRemoteNG.Themes;
 using System.Linq;
 using System.Collections.Generic;
+using System.Globalization;
 using BrightIdeasSoftware;
 using mRemoteNG.Properties;
 using mRemoteNG.UI.TaskDialog;
@@ -202,12 +203,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         /// <summary>
         /// Map an internal color key (e.g. "Button_Hover_Background") to a
-        /// localized, human-readable label shown in the theme color list.
-        /// Falls back to the raw key when no mapping is defined.
+        /// human-readable label shown in the theme color list. The Japanese
+        /// labels in <see cref="ColorKeyJaMap"/> only apply under a Japanese
+        /// UI culture; everyone else gets a humanized version of the raw key.
         /// </summary>
         private static string ColorKeyDisplayName(string key)
         {
-            return ColorKeyJaMap.TryGetValue(key, out var jp) ? jp : key;
+            if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "ja"
+                && ColorKeyJaMap.TryGetValue(key, out var jp))
+            {
+                return jp;
+            }
+
+            return key.Replace('_', ' ');
         }
 
         // Japanese display labels for the palette keys defined in

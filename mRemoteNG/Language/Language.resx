@@ -1961,7 +1961,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Type the new theme name</value>
   </data>
   <data name="OptionsThemeChangeWarning" xml:space="preserve">
-    <value>Warning: Restart is required to commit any theme configuration change.</value>
+    <value>Theme changes apply immediately. Some panel borders and tab strips may not update until mRemoteNG is restarted.</value>
   </data>
   <data name="CouldNotFindExternalTool" xml:space="preserve">
     <value>Could not find external tool with name "{0}"</value>
