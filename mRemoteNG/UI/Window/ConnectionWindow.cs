@@ -855,9 +855,28 @@ namespace mRemoteNG.UI.Window
             ProtocolBase protocolBase = sender as ProtocolBase;
             if (!(protocolBase?.InterfaceControl.Parent is ConnectionTab tabPage)) return;
             if (tabPage.Disposing || tabPage.IsDisposed) return;
-            if (IsDisposed || Disposing) return;
+            if (IsDisposed || Disposing || !IsHandleCreated) return;
             tabPage.protocolClose = true;
-            Invoke(new Action(() => tabPage.Close()));
+            try
+            {
+                Invoke(new Action(() =>
+                {
+                    // The tab may have been disposed by the time this marshaled
+                    // call runs on the UI thread.
+                    if (tabPage.IsDisposed || tabPage.Disposing) return;
+                    tabPage.Close();
+                }));
+            }
+            catch (ObjectDisposedException)
+            {
+                // This ConnectionWindow was disposed on the UI thread between the
+                // guard above and this Invoke (the user closed the tab/window while
+                // the protocol's background CloseBG thread was firing). Nothing to do.
+            }
+            catch (InvalidOperationException)
+            {
+                // Handle not created or window being destroyed - same race, ignore.
+            }
         }
 
         #endregion
