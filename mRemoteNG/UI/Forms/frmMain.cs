@@ -262,6 +262,8 @@ namespace mRemoteNG.UI.Forms
             SystemEvents.DisplaySettingsChanged += _advancedWindowMenu.OnDisplayChanged;
             ApplyLanguage();
 
+            UIFontManager.Apply(this);
+
             Opacity = 1;
             //Fix MagicRemove , revision on panel strategy for mdi
 

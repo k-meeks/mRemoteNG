@@ -94,5 +94,41 @@ namespace mRemoteNG.Properties {
                 this["cbAppearancePageInOptionMenu"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8.25")]
+        public float UIFontSize {
+            get {
+                return ((float)(this["UIFontSize"]));
+            }
+            set {
+                this["UIFontSize"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Segoe UI")]
+        public string UIFontFamily {
+            get {
+                return ((string)(this["UIFontFamily"]));
+            }
+            set {
+                this["UIFontFamily"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Regular")]
+        public string UIFontStyle {
+            get {
+                return ((string)(this["UIFontStyle"]));
+            }
+            set {
+                this["UIFontStyle"] = value;
+            }
+        }
     }
 }

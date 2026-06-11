@@ -42,6 +42,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon = new MrngCheckBox();
             chkMinimizeToSystemTray = new MrngCheckBox();
             chkCloseToSystemTray = new MrngCheckBox();
+            lblUIFont = new MrngLabel();
+            btnUIFont = new MrngButton();
             pnlOptions = new System.Windows.Forms.Panel();
             lblRegistrySettingsUsedInfo = new System.Windows.Forms.Label();
             pnlOptions.SuspendLayout();
@@ -135,9 +137,30 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkCloseToSystemTray.TabIndex = 7;
             chkCloseToSystemTray.Text = "Close to System Tray";
             chkCloseToSystemTray.UseVisualStyleBackColor = true;
-            // 
+            //
+            // lblUIFont
+            //
+            lblUIFont.AutoSize = true;
+            lblUIFont.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lblUIFont.Location = new System.Drawing.Point(3, 247);
+            lblUIFont.Name = "lblUIFont";
+            lblUIFont.Size = new System.Drawing.Size(72, 13);
+            lblUIFont.TabIndex = 8;
+            lblUIFont.Text = "Interface font";
+            //
+            // btnUIFont
+            //
+            btnUIFont._mice = MrngButton.MouseState.OUT;
+            btnUIFont.Location = new System.Drawing.Point(3, 270);
+            btnUIFont.Name = "btnUIFont";
+            btnUIFont.Size = new System.Drawing.Size(220, 23);
+            btnUIFont.TabIndex = 9;
+            btnUIFont.Text = "Segoe UI, 8.25pt";
+            btnUIFont.UseVisualStyleBackColor = true;
+            btnUIFont.Click += btnUIFont_Click;
+            //
             // pnlOptions
-            // 
+            //
             pnlOptions.Controls.Add(cboLanguage);
             pnlOptions.Controls.Add(chkCloseToSystemTray);
             pnlOptions.Controls.Add(chkMinimizeToSystemTray);
@@ -146,10 +169,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             pnlOptions.Controls.Add(chkShowDescriptionTooltipsInTree);
             pnlOptions.Controls.Add(lblLanguage);
             pnlOptions.Controls.Add(chkShowFullConnectionsFilePathInTitle);
+            pnlOptions.Controls.Add(lblUIFont);
+            pnlOptions.Controls.Add(btnUIFont);
             pnlOptions.Dock = System.Windows.Forms.DockStyle.Top;
             pnlOptions.Location = new System.Drawing.Point(0, 30);
             pnlOptions.Name = "pnlOptions";
-            pnlOptions.Size = new System.Drawing.Size(610, 267);
+            pnlOptions.Size = new System.Drawing.Size(610, 297);
             pnlOptions.TabIndex = 8;
             // 
             // lblRegistrySettingsUsedInfo
@@ -186,6 +211,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal MrngCheckBox chkShowSystemTrayIcon;
         internal MrngCheckBox chkMinimizeToSystemTray;
         internal MrngCheckBox chkCloseToSystemTray;
+        internal Controls.MrngLabel lblUIFont;
+        internal MrngButton btnUIFont;
         private System.Windows.Forms.Panel pnlOptions;
         internal System.Windows.Forms.Label lblRegistrySettingsUsedInfo;
     }

@@ -6556,7 +6556,16 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("ShowDescriptionTooltips", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Interface font.
+        /// </summary>
+        internal static string UIFont {
+            get {
+                return ResourceManager.GetString("UIFont", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Show for user.
         /// </summary>

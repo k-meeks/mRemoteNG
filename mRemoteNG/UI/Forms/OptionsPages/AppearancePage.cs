@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Properties;
+using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Resources.Language;
 using System.Runtime.Versioning;
@@ -13,6 +15,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
     public sealed partial class AppearancePage
     {
         private OptRegistryAppearancePage pageRegSettingsInstance;
+        private Font _selectedUIFont;
+
         public AppearancePage()
         {
             InitializeComponent();
@@ -38,6 +42,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon.Text = Language.AlwaysShowSysTrayIcon;
             chkMinimizeToSystemTray.Text = Language.MinimizeToSysTray;
             chkCloseToSystemTray.Text = Language.CloseToSysTray;
+            lblUIFont.Text = Language.UIFont;
             lblRegistrySettingsUsedInfo.Text = Language.OptionsCompanyPolicyMessage;
         }
 
@@ -67,6 +72,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkShowSystemTrayIcon.Checked = Properties.OptionsAppearancePage.Default.ShowSystemTrayIcon;
             chkMinimizeToSystemTray.Checked = Properties.OptionsAppearancePage.Default.MinimizeToTray;
             chkCloseToSystemTray.Checked = Properties.OptionsAppearancePage.Default.CloseToTray;
+
+            _selectedUIFont = UIFontManager.Font;
+            btnUIFont.Text = FontDescription(_selectedUIFont);
         }
 
         public override void SaveSettings()
@@ -104,6 +112,42 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Properties.OptionsAppearancePage.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
             Properties.OptionsAppearancePage.Default.CloseToTray = chkCloseToSystemTray.Checked;
+
+            if (_selectedUIFont != null && !FontEquals(_selectedUIFont, UIFontManager.Font))
+            {
+                Properties.OptionsAppearancePage.Default.UIFontFamily = _selectedUIFont.FontFamily.Name;
+                Properties.OptionsAppearancePage.Default.UIFontSize = _selectedUIFont.Size;
+                Properties.OptionsAppearancePage.Default.UIFontStyle = _selectedUIFont.Style.ToString();
+                UIFontManager.ApplyToOpenForms();
+            }
+        }
+
+        private void btnUIFont_Click(object sender, EventArgs e)
+        {
+            using FontDialog fontDlg = new()
+            {
+                Font = _selectedUIFont,
+                ShowEffects = false,
+                MinSize = 6,
+                MaxSize = 24
+            };
+
+            if (fontDlg.ShowDialog() != DialogResult.OK) return;
+
+            _selectedUIFont = fontDlg.Font;
+            btnUIFont.Text = FontDescription(_selectedUIFont);
+        }
+
+        private static string FontDescription(Font font)
+        {
+            return font.Style == FontStyle.Regular
+                ? string.Format("{0}, {1}pt", font.Name, font.Size)
+                : string.Format("{0}, {1}pt, {2}", font.Name, font.Size, font.Style);
+        }
+
+        private static bool FontEquals(Font a, Font b)
+        {
+            return a.FontFamily.Equals(b.FontFamily) && a.Style == b.Style && Math.Abs(a.Size - b.Size) < 0.01f;
         }
 
         public override void LoadRegistrySettings()
