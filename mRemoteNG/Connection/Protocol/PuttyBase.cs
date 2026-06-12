@@ -28,6 +28,7 @@ namespace mRemoteNG.Connection.Protocol
     public class PuttyBase : ProtocolBase
     {
         private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
+        private const int IDM_COPYALL = 0x170; // PuTTY "Copy All to Clipboard" Menu ID
         private bool _isPuttyNg;
         private readonly DisplayProperties _display = new();
 
@@ -458,6 +459,18 @@ namespace mRemoteNG.Connection.Protocol
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.PuttyShowSettingsDialogFailed + Environment.NewLine + ex.Message, true);
+            }
+        }
+
+        public void CopyAllToClipboard()
+        {
+            try
+            {
+                NativeMethods.PostMessage(PuttyHandle, NativeMethods.WM_SYSCOMMAND, (IntPtr)IDM_COPYALL, (IntPtr)0);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.PuttyCopyAllToClipboardFailed + Environment.NewLine + ex.Message, true);
             }
         }
 

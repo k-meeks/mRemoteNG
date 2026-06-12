@@ -27,6 +27,7 @@ namespace mRemoteNG.UI.Window
         private ToolStripMenuItem cmenTabStartChat;
         private ToolStripMenuItem cmenTabRefreshScreen;
         private ToolStripMenuItem cmenTabPuttySettings;
+        private ToolStripMenuItem cmenTabPuttyCopyAll;
 
 
         private void InitializeComponent()
@@ -53,6 +54,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTabSendSpecialKeysCtrlEsc = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabSep2 = new System.Windows.Forms.ToolStripSeparator();
             this.cmenTabPuttySettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmenTabPuttyCopyAll = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTabExternalApps = new System.Windows.Forms.ToolStripMenuItem();
             this.cmenTab.SuspendLayout();
             this.SuspendLayout();
@@ -87,6 +89,7 @@ namespace mRemoteNG.UI.Window
             this.cmenTabSendSpecialKeys,
             this.cmenTabSep2,
             this.cmenTabPuttySettings,
+            this.cmenTabPuttyCopyAll,
             this.cmenTabExternalApps});
             this.cmenTab.Name = "cmenTab";
             this.cmenTab.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -210,12 +213,19 @@ namespace mRemoteNG.UI.Window
             this.cmenTabSep2.Size = new System.Drawing.Size(227, 6);
             // 
             // cmenTabPuttySettings
-            // 
+            //
             this.cmenTabPuttySettings.Image = global::mRemoteNG.Properties.Resources.PuttyConfig;
             this.cmenTabPuttySettings.Name = "cmenTabPuttySettings";
             this.cmenTabPuttySettings.Size = new System.Drawing.Size(230, 22);
             this.cmenTabPuttySettings.Text = "PuTTY Settings";
-            // 
+            //
+            // cmenTabPuttyCopyAll
+            //
+            this.cmenTabPuttyCopyAll.Image = global::mRemoteNG.Properties.Resources.Copy_16x;
+            this.cmenTabPuttyCopyAll.Name = "cmenTabPuttyCopyAll";
+            this.cmenTabPuttyCopyAll.Size = new System.Drawing.Size(230, 22);
+            this.cmenTabPuttyCopyAll.Text = "Copy All to Clipboard";
+            //
             // cmenTabExternalApps
             // 
             this.cmenTabExternalApps.Image = ((System.Drawing.Image)(resources.GetObject("cmenTabExternalApps.Image")));

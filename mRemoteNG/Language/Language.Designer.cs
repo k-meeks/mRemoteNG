@@ -5413,6 +5413,24 @@ namespace mRemoteNG.Resources.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy All to Clipboard.
+        /// </summary>
+        internal static string PuttyCopyAllToClipboard {
+            get {
+                return ResourceManager.GetString("PuttyCopyAllToClipboard", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Copy All to Clipboard failed!.
+        /// </summary>
+        internal static string PuttyCopyAllToClipboardFailed {
+            get {
+                return ResourceManager.GetString("PuttyCopyAllToClipboardFailed", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Dispose of Putty process failed!.
         /// </summary>
         internal static string PuttyDisposeFailed {

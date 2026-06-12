@@ -91,6 +91,7 @@ namespace mRemoteNG.UI.Window
             cmenTabDisconnectOthers.Click += (sender, args) => CloseOtherTabs();
             cmenTabDisconnectOthersRight.Click += (sender, args) => CloseOtherTabsToTheRight();
             cmenTabPuttySettings.Click += (sender, args) => ShowPuttySettingsDialog();
+            cmenTabPuttyCopyAll.Click += (sender, args) => CopyAllPuttyToClipboard();
             GotFocus += ConnectionWindow_GotFocus;
         }
 
@@ -485,6 +486,7 @@ namespace mRemoteNG.UI.Window
                 }
 
                 cmenTabPuttySettings.Visible = interfaceControl.Protocol is PuttyBase;
+                cmenTabPuttyCopyAll.Visible = interfaceControl.Protocol is PuttyBase;
 
                 AddExternalApps();
             }
@@ -658,6 +660,22 @@ namespace mRemoteNG.UI.Window
             {
                 Runtime.MessageCollector.AddExceptionMessage(
                                                              "ShowPuttySettingsDialog (UI.Window.ConnectionWindow) failed",
+                                                             ex);
+            }
+        }
+
+        private void CopyAllPuttyToClipboard()
+        {
+            try
+            {
+                InterfaceControl interfaceControl = GetInterfaceControl();
+                PuttyBase puttyBase = interfaceControl?.Protocol as PuttyBase;
+                puttyBase?.CopyAllToClipboard();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage(
+                                                             "CopyAllPuttyToClipboard (UI.Window.ConnectionWindow) failed",
                                                              ex);
             }
         }

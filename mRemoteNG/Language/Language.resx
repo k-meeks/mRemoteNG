@@ -1380,6 +1380,12 @@ If you run into such an error, please create a new connection file!</value>
   <data name="PuttyResizeFailed" xml:space="preserve">
     <value>Putty Resize Failed!</value>
   </data>
+  <data name="PuttyCopyAllToClipboard" xml:space="preserve">
+    <value>Copy All to Clipboard</value>
+  </data>
+  <data name="PuttyCopyAllToClipboardFailed" xml:space="preserve">
+    <value>Copy All to Clipboard failed!</value>
+  </data>
   <data name="PuttySavedSessionsRootName" xml:space="preserve">
     <value>PuTTY Saved Sessions</value>
   </data>
