@@ -3,6 +3,9 @@
 **/[Rr]elease [Pp]ortable/
 **/[Dd]ebug [Pp]ortable/
 
+# Claude Code project notes - local-only, not for the public fork
+/CLAUDE.md
+
 *.pfx
 Thumbs.db
 _Re[Ss]harper.*
