@@ -1,3 +1,25 @@
+## About this fork
+
+This is a personal fork of mRemoteNG, maintained for use launching PuTTY/SSH and RDP
+sessions to critical infrastructure (hospital/university environment). Changes here
+focus on security hardening and day-to-day usability fixes:
+
+- Live theme switching (no restart required when changing themes)
+- Fixed theme palette color labels showing Japanese text for non-Japanese UI cultures
+- Configurable interface font (family/style/size) via the standard Windows font picker
+- Fixed main window getting stuck behind other windows after startup
+- Fixed an `ObjectDisposedException` crash when closing a connection tab
+- Removed the bundled PuTTYNG binary; mRemoteNG now auto-detects an installed official
+  PuTTY (or prompts the user to point at one / download it), and the Advanced options
+  page shows what was detected
+- Removed the one credential-delivery path that depended on the bundled PuTTYNG
+  (VaultOpenbao SSH-OTP `-auth-plugin` injection) - other credential providers
+  (Secret Server, Passwordstate, 1Password, VaultOpenbao KV/LDAP) are unaffected
+
+See the individual commit messages for details on each change.
+
+---
+
 <p align="Left">
 	Developing mRemoteNG to its fullest potential is my personal priority.<br>
 While the project remains non-commercial, it does come with ongoing costs — including VPS hosting for testing, AI tools, domain fees, and more. <br> If you find value in mRemoteNG and want to support its future, even a small donation from our community can make a huge difference.<br>
