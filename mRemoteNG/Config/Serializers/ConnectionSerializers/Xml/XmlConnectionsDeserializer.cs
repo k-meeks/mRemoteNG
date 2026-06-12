@@ -45,6 +45,18 @@ namespace mRemoteNG.Config.Serializers.ConnectionSerializers.Xml
             try
             {
                 LoadXmlConnectionData(xml);
+
+                // LoadXmlConnectionData leaves _xmlDocument null when
+                // LegacyFullFileDecrypt couldn't decrypt the file (e.g. the
+                // user canceled the password prompt). Treat that the same as
+                // "decryption failed" - the caller (ConnectionsService) shows
+                // a clean error dialog for a null result. Without this check,
+                // ValidateConnectionFileVersion's null-dereference threw a
+                // NullReferenceException that Runtime.LoadConnections caught
+                // and responded to by re-showing the Open Connection File
+                // dialog, recursively.
+                if (_xmlDocument == null) return null;
+
                 ValidateConnectionFileVersion();
 
                 XmlElement rootXmlElement = _xmlDocument.DocumentElement;
