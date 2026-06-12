@@ -43,6 +43,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblUVNCSCPort = new MrngLabel();
             lblSeconds = new MrngLabel();
             btnBrowseCustomPuttyPath = new MrngButton();
+            lblDetectedPutty = new MrngLabel();
+            txtDetectedPuttyPath = new MrngTextBox();
             lnkPuttyDownload = new System.Windows.Forms.LinkLabel();
             chkLoadBalanceInfoUseUtf8 = new MrngCheckBox();
             chkNoReconnect = new MrngCheckBox();
@@ -52,7 +54,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblMaximumPuttyWaitTime
             // 
-            lblMaximumPuttyWaitTime.Location = new System.Drawing.Point(9, 174);
+            lblMaximumPuttyWaitTime.Location = new System.Drawing.Point(9, 202);
             lblMaximumPuttyWaitTime.Name = "lblMaximumPuttyWaitTime";
             lblMaximumPuttyWaitTime.Size = new System.Drawing.Size(364, 20);
             lblMaximumPuttyWaitTime.TabIndex = 7;
@@ -75,7 +77,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numPuttyWaitTime
             // 
             numPuttyWaitTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            numPuttyWaitTime.Location = new System.Drawing.Point(379, 175);
+            numPuttyWaitTime.Location = new System.Drawing.Point(379, 203);
             numPuttyWaitTime.Margin = new System.Windows.Forms.Padding(6);
             numPuttyWaitTime.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
             numPuttyWaitTime.Name = "numPuttyWaitTime";
@@ -83,12 +85,34 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             numPuttyWaitTime.TabIndex = 7;
             numPuttyWaitTime.Value = new decimal(new int[] { 5, 0, 0, 0 });
             //
+            // lblDetectedPutty
+            //
+            lblDetectedPutty.AutoSize = true;
+            lblDetectedPutty.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            lblDetectedPutty.Location = new System.Drawing.Point(9, 80);
+            lblDetectedPutty.Name = "lblDetectedPutty";
+            lblDetectedPutty.Size = new System.Drawing.Size(86, 13);
+            lblDetectedPutty.TabIndex = 13;
+            lblDetectedPutty.Text = "Detected PuTTY:";
+            //
+            // txtDetectedPuttyPath
+            //
+            txtDetectedPuttyPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            txtDetectedPuttyPath.Enabled = false;
+            txtDetectedPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            txtDetectedPuttyPath.Location = new System.Drawing.Point(125, 76);
+            txtDetectedPuttyPath.Name = "txtDetectedPuttyPath";
+            txtDetectedPuttyPath.ReadOnly = true;
+            txtDetectedPuttyPath.Size = new System.Drawing.Size(376, 22);
+            txtDetectedPuttyPath.TabIndex = 14;
+            txtDetectedPuttyPath.TabStop = false;
+            //
             // chkUseCustomPuttyPath
             //
             chkUseCustomPuttyPath._mice = MrngCheckBox.MouseState.OUT;
             chkUseCustomPuttyPath.AutoSize = true;
             chkUseCustomPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            chkUseCustomPuttyPath.Location = new System.Drawing.Point(9, 78);
+            chkUseCustomPuttyPath.Location = new System.Drawing.Point(9, 106);
             chkUseCustomPuttyPath.Name = "chkUseCustomPuttyPath";
             chkUseCustomPuttyPath.Size = new System.Drawing.Size(146, 17);
             chkUseCustomPuttyPath.TabIndex = 3;
@@ -98,7 +122,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblConfigurePuttySessions
             // 
-            lblConfigurePuttySessions.Location = new System.Drawing.Point(9, 138);
+            lblConfigurePuttySessions.Location = new System.Drawing.Point(9, 166);
             lblConfigurePuttySessions.Name = "lblConfigurePuttySessions";
             lblConfigurePuttySessions.Size = new System.Drawing.Size(364, 25);
             lblConfigurePuttySessions.TabIndex = 5;
@@ -108,7 +132,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // numUVNCSCPort
             // 
             numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            numUVNCSCPort.Location = new System.Drawing.Point(379, 202);
+            numUVNCSCPort.Location = new System.Drawing.Point(379, 230);
             numUVNCSCPort.Margin = new System.Windows.Forms.Padding(6);
             numUVNCSCPort.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
             numUVNCSCPort.Name = "numUVNCSCPort";
@@ -122,7 +146,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtCustomPuttyPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             txtCustomPuttyPath.Enabled = false;
             txtCustomPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            txtCustomPuttyPath.Location = new System.Drawing.Point(27, 100);
+            txtCustomPuttyPath.Location = new System.Drawing.Point(27, 128);
             txtCustomPuttyPath.Name = "txtCustomPuttyPath";
             txtCustomPuttyPath.Size = new System.Drawing.Size(346, 22);
             txtCustomPuttyPath.TabIndex = 4;
@@ -133,7 +157,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnLaunchPutty._mice = MrngButton.MouseState.OUT;
             btnLaunchPutty.Image = Properties.Resources.PuttyConfig;
             btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            btnLaunchPutty.Location = new System.Drawing.Point(379, 138);
+            btnLaunchPutty.Location = new System.Drawing.Point(379, 166);
             btnLaunchPutty.Name = "btnLaunchPutty";
             btnLaunchPutty.Size = new System.Drawing.Size(122, 25);
             btnLaunchPutty.TabIndex = 6;
@@ -144,7 +168,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // lblUVNCSCPort
             // 
-            lblUVNCSCPort.Location = new System.Drawing.Point(9, 202);
+            lblUVNCSCPort.Location = new System.Drawing.Point(9, 230);
             lblUVNCSCPort.Name = "lblUVNCSCPort";
             lblUVNCSCPort.Size = new System.Drawing.Size(364, 19);
             lblUVNCSCPort.TabIndex = 10;
@@ -155,7 +179,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // lblSeconds
             // 
             lblSeconds.AutoSize = true;
-            lblSeconds.Location = new System.Drawing.Point(445, 178);
+            lblSeconds.Location = new System.Drawing.Point(445, 206);
             lblSeconds.Name = "lblSeconds";
             lblSeconds.Size = new System.Drawing.Size(49, 13);
             lblSeconds.TabIndex = 9;
@@ -165,7 +189,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             btnBrowseCustomPuttyPath._mice = MrngButton.MouseState.OUT;
             btnBrowseCustomPuttyPath.Enabled = false;
-            btnBrowseCustomPuttyPath.Location = new System.Drawing.Point(379, 99);
+            btnBrowseCustomPuttyPath.Location = new System.Drawing.Point(379, 127);
             btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath";
             btnBrowseCustomPuttyPath.Size = new System.Drawing.Size(122, 25);
             btnBrowseCustomPuttyPath.TabIndex = 5;
@@ -177,7 +201,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             //
             lnkPuttyDownload.AutoSize = true;
             lnkPuttyDownload.Font = new System.Drawing.Font("Segoe UI", 8.25F);
-            lnkPuttyDownload.Location = new System.Drawing.Point(27, 124);
+            lnkPuttyDownload.Location = new System.Drawing.Point(27, 152);
             lnkPuttyDownload.Name = "lnkPuttyDownload";
             lnkPuttyDownload.Size = new System.Drawing.Size(150, 13);
             lnkPuttyDownload.TabIndex = 12;
@@ -228,6 +252,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Controls.Add(lblSeconds);
             Controls.Add(btnBrowseCustomPuttyPath);
             Controls.Add(lnkPuttyDownload);
+            Controls.Add(lblDetectedPutty);
+            Controls.Add(txtDetectedPuttyPath);
             Margin = new System.Windows.Forms.Padding(4);
             Name = "AdvancedPage";
             Size = new System.Drawing.Size(589, 440);
@@ -249,6 +275,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal Controls.MrngLabel lblSeconds;
         internal MrngButton btnBrowseCustomPuttyPath;
         internal System.Windows.Forms.LinkLabel lnkPuttyDownload;
+        internal Controls.MrngLabel lblDetectedPutty;
+        internal Controls.MrngTextBox txtDetectedPuttyPath;
         private MrngCheckBox chkLoadBalanceInfoUseUtf8;
         internal MrngCheckBox chkNoReconnect;
     }

@@ -279,6 +279,12 @@
   <data name="DownloadPutty" xml:space="preserve">
     <value>Download official PuTTY</value>
   </data>
+  <data name="DetectedPutty" xml:space="preserve">
+    <value>Detected PuTTY:</value>
+  </data>
+  <data name="PuttyNotDetected" xml:space="preserve">
+    <value>(not detected - configure a custom path below or install PuTTY)</value>
+  </data>
   <data name="SelectPuttyFolder" xml:space="preserve">
     <value>Select the folder containing putty.exe</value>
   </data>

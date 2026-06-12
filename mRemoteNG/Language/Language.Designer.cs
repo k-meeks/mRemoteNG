@@ -772,6 +772,24 @@ namespace mRemoteNG.Resources.Language {
         }
 
         /// <summary>
+        ///   Looks up a localized string similar to Detected PuTTY:.
+        /// </summary>
+        internal static string DetectedPutty {
+            get {
+                return ResourceManager.GetString("DetectedPutty", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to (not detected - configure a custom path below or install PuTTY).
+        /// </summary>
+        internal static string PuttyNotDetected {
+            get {
+                return ResourceManager.GetString("PuttyNotDetected", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Select the folder containing putty.exe.
         /// </summary>
         internal static string SelectPuttyFolder {

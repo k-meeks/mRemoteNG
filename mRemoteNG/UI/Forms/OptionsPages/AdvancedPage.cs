@@ -47,6 +47,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language._Browse;
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
+            lblDetectedPutty.Text = Language.DetectedPutty;
             lnkPuttyDownload.Text = Language.DownloadPutty;
             lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }
@@ -63,6 +64,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseCustomPuttyPath.Checked = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath;
             txtCustomPuttyPath.Text = Properties.OptionsAdvancedPage.Default.CustomPuttyPath;
             SetPuttyLaunchButtonEnabled();
+            UpdateDetectedPuttyPath();
 
             numUVNCSCPort.Value = Properties.OptionsAdvancedPage.Default.UVNCSCPort;
         }
@@ -93,6 +95,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 GeneralAppInfo.ResetDetectedPuttyPath();
                 PuttyBase.PuttyPath = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
+                UpdateDetectedPuttyPath();
             }
 
             Properties.OptionsAdvancedPage.Default.MaxPuttyWaitTime = (int)numPuttyWaitTime.Value;
@@ -200,6 +203,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             lblConfigurePuttySessions.Enabled = exists;
             btnLaunchPutty.Enabled = exists;
+        }
+
+        /// <summary>
+        /// Shows the auto-detected official PuTTY path (independent of the
+        /// custom path setting) so the user can confirm what mRemoteNG found
+        /// on their system.
+        /// </summary>
+        private void UpdateDetectedPuttyPath()
+        {
+            string detected = GeneralAppInfo.PuttyPath;
+            txtDetectedPuttyPath.Text = string.IsNullOrEmpty(detected)
+                ? Language.PuttyNotDetected
+                : detected;
         }
 
         private void chkNoReconnect_CheckedChanged(object sender, EventArgs e)
