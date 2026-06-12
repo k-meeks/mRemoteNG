@@ -468,15 +468,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>OptionsUpdatesPage.Designer.cs</LastGenOutput>
     </None>
-    <None Update="PuTTYNG.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Header_dark.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
-    </None>
-    <None Update="Resources\PuTTYNG.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Schemas\mremoteng_confcons_v2_5.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>

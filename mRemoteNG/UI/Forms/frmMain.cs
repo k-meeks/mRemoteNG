@@ -404,7 +404,25 @@ namespace mRemoteNG.UI.Forms
         private async void FrmMain_Shown(object sender, EventArgs e)
         {
             PromptForUpdatesPreference();
+            PromptForPuttyIfMissing();
             await CheckForUpdates();
+        }
+
+        /// <summary>
+        /// mRemoteNG no longer ships a bundled PuTTY. On first run, if no PuTTY
+        /// could be auto-detected and the user hasn't set a custom path, open the
+        /// Advanced options page so they can point at their installed putty.exe
+        /// (or follow the download link to Simon Tatham's official build).
+        /// </summary>
+        private void PromptForPuttyIfMissing()
+        {
+            if (!Properties.App.Default.FirstStart) return;
+            if (Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath) return;
+            if (!string.IsNullOrEmpty(GeneralAppInfo.PuttyPath)) return;
+
+            AppWindows.Show(WindowType.Options);
+            if (AppWindows.OptionsFormWindow != null)
+                AppWindows.OptionsFormWindow.SetActivatedPage(Language.Advanced);
         }
 
         private void PromptForUpdatesPreference()

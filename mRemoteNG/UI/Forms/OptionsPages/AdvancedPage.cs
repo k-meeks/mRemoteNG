@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -46,6 +47,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnLaunchPutty.Text = Language.ButtonLaunchPutty;
             btnBrowseCustomPuttyPath.Text = Language._Browse;
             chkUseCustomPuttyPath.Text = Language.CheckboxPuttyPath;
+            lnkPuttyDownload.Text = Language.DownloadPutty;
             lblUVNCSCPort.Text = Language.UltraVNCSCListeningPort;
         }
 
@@ -86,6 +88,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             if (puttyPathChanged)
             {
+                // Re-run auto-detection in case the user unchecked the custom
+                // path or installed PuTTY since startup.
+                GeneralAppInfo.ResetDetectedPuttyPath();
                 PuttyBase.PuttyPath = Properties.OptionsAdvancedPage.Default.UseCustomPuttyPath ? Properties.OptionsAdvancedPage.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
                 PuttySessionsManager.Instance.AddSessions();
             }
@@ -114,16 +119,47 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void btnBrowseCustomPuttyPath_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new())
+            using FolderBrowserDialog folderDialog = new()
             {
-                openFileDialog.Filter = $@"{Language.FilterApplication}|*.exe|{Language.FilterAll}|*.*";
-                openFileDialog.FileName = Path.GetFileName(GeneralAppInfo.PuttyPath);
-                openFileDialog.CheckFileExists = true;
-                openFileDialog.Multiselect = false;
+                Description = Language.SelectPuttyFolder,
+                UseDescriptionForTitle = true,
+                ShowNewFolderButton = false
+            };
 
-                if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-                txtCustomPuttyPath.Text = openFileDialog.FileName;
-                SetPuttyLaunchButtonEnabled();
+            // Seed with the folder of the current/detected putty if we have one.
+            string current = string.IsNullOrEmpty(txtCustomPuttyPath.Text)
+                ? GeneralAppInfo.PuttyPath
+                : txtCustomPuttyPath.Text;
+            if (!string.IsNullOrEmpty(current))
+            {
+                try { folderDialog.SelectedPath = Path.GetDirectoryName(current); }
+                catch { /* ignored - bad path, dialog opens at default */ }
+            }
+
+            if (folderDialog.ShowDialog() != DialogResult.OK) return;
+
+            string resolved = PuttyLocator.ResolveFromDirectory(folderDialog.SelectedPath);
+            if (string.IsNullOrEmpty(resolved))
+            {
+                MessageBox.Show(
+                    string.Format(Language.PuttyExeNotFoundInFolder, PuttyLocator.PuttyExeName),
+                    Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            txtCustomPuttyPath.Text = resolved;
+            SetPuttyLaunchButtonEnabled();
+        }
+
+        private void lnkPuttyDownload_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo(GeneralAppInfo.UrlPuttyDownload) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionMessage("Could not open the PuTTY download page.", ex);
             }
         }
 

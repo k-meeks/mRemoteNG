@@ -20,13 +20,18 @@ namespace mRemoteNG.App.Info
         public const string UrlCommunity = "https://www.reddit.com/r/mRemoteNG";
         public const string UrlBugs = "https://github.com/mRemoteNG/mRemoteNG/issues/new";
         public const string UrlDocumentation = "https://mremoteng.readthedocs.io/en/latest/";
+        public const string UrlPuttyDownload = "https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html";
         public static readonly string ApplicationVersion = Application.ProductVersion;
         public static readonly string? ProductName = Application.ProductName;
         public static readonly string? Copyright = (Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false) as AssemblyCopyrightAttribute)?.Copyright;
         public static readonly string? HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location);
 
         //public static string ReportingFilePath = "";
-        private static readonly string puttyPath = HomePath + "\\PuTTYNG.exe";
+        // mRemoteNG no longer bundles a PuTTY binary. Resolve an installed
+        // official PuTTY (Simon Tatham build) on first access and cache it.
+        // Empty string when none is found - the user is then prompted to point
+        // at one via Options > Advanced. See Tools.PuttyLocator.
+        private static string? _detectedPuttyPath;
 
         public static string UserAgent
         {
@@ -52,7 +57,13 @@ namespace mRemoteNG.App.Info
             }
         }
 
-        public static string PuttyPath => puttyPath;
+        public static string PuttyPath => _detectedPuttyPath ??= Tools.PuttyLocator.Detect();
+
+        /// <summary>
+        /// Forces re-detection of an installed PuTTY on next <see cref="PuttyPath"/>
+        /// access. Call after the user installs PuTTY or changes the path.
+        /// </summary>
+        public static void ResetDetectedPuttyPath() => _detectedPuttyPath = null;
 
         public static Version? GetApplicationVersion()
         {

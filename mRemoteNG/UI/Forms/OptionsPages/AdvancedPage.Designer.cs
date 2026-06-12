@@ -43,6 +43,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             lblUVNCSCPort = new MrngLabel();
             lblSeconds = new MrngLabel();
             btnBrowseCustomPuttyPath = new MrngButton();
+            lnkPuttyDownload = new System.Windows.Forms.LinkLabel();
             chkLoadBalanceInfoUseUtf8 = new MrngCheckBox();
             chkNoReconnect = new MrngCheckBox();
             ((System.ComponentModel.ISupportInitialize)numPuttyWaitTime).BeginInit();
@@ -81,9 +82,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             numPuttyWaitTime.Size = new System.Drawing.Size(64, 22);
             numPuttyWaitTime.TabIndex = 7;
             numPuttyWaitTime.Value = new decimal(new int[] { 5, 0, 0, 0 });
-            // 
+            //
             // chkUseCustomPuttyPath
-            // 
+            //
             chkUseCustomPuttyPath._mice = MrngCheckBox.MouseState.OUT;
             chkUseCustomPuttyPath.AutoSize = true;
             chkUseCustomPuttyPath.Font = new System.Drawing.Font("Segoe UI", 8.25F);
@@ -171,7 +172,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             btnBrowseCustomPuttyPath.Text = "Browse...";
             btnBrowseCustomPuttyPath.UseVisualStyleBackColor = true;
             btnBrowseCustomPuttyPath.Click += btnBrowseCustomPuttyPath_Click;
-            // 
+            //
+            // lnkPuttyDownload
+            //
+            lnkPuttyDownload.AutoSize = true;
+            lnkPuttyDownload.Font = new System.Drawing.Font("Segoe UI", 8.25F);
+            lnkPuttyDownload.Location = new System.Drawing.Point(27, 124);
+            lnkPuttyDownload.Name = "lnkPuttyDownload";
+            lnkPuttyDownload.Size = new System.Drawing.Size(150, 13);
+            lnkPuttyDownload.TabIndex = 12;
+            lnkPuttyDownload.TabStop = true;
+            lnkPuttyDownload.Text = "Download official PuTTY";
+            lnkPuttyDownload.LinkClicked += lnkPuttyDownload_LinkClicked;
+            //
             // chkLoadBalanceInfoUseUtf8
             // 
             chkLoadBalanceInfoUseUtf8._mice = MrngCheckBox.MouseState.OUT;
@@ -214,6 +227,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Controls.Add(lblUVNCSCPort);
             Controls.Add(lblSeconds);
             Controls.Add(btnBrowseCustomPuttyPath);
+            Controls.Add(lnkPuttyDownload);
             Margin = new System.Windows.Forms.Padding(4);
             Name = "AdvancedPage";
             Size = new System.Drawing.Size(589, 440);
@@ -234,6 +248,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         internal Controls.MrngLabel lblUVNCSCPort;
         internal Controls.MrngLabel lblSeconds;
         internal MrngButton btnBrowseCustomPuttyPath;
+        internal System.Windows.Forms.LinkLabel lnkPuttyDownload;
         private MrngCheckBox chkLoadBalanceInfoUseUtf8;
         internal MrngCheckBox chkNoReconnect;
     }

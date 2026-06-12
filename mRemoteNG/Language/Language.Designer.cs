@@ -761,7 +761,34 @@ namespace mRemoteNG.Resources.Language {
                 return ResourceManager.GetString("CheckboxPuttyPath", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Download official PuTTY.
+        /// </summary>
+        internal static string DownloadPutty {
+            get {
+                return ResourceManager.GetString("DownloadPutty", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Select the folder containing putty.exe.
+        /// </summary>
+        internal static string SelectPuttyFolder {
+            get {
+                return ResourceManager.GetString("SelectPuttyFolder", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to {0} was not found in the selected folder.
+        /// </summary>
+        internal static string PuttyExeNotFoundInFolder {
+            get {
+                return ResourceManager.GetString("PuttyExeNotFoundInFolder", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Reconnect when ready.
         /// </summary>

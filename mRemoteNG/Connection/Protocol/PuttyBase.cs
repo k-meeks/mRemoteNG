@@ -237,32 +237,6 @@ namespace mRemoteNG.Connection.Protocol
                             }
                         }
 
-                        if (InterfaceControl.Info?.ExternalCredentialProvider == ExternalCredentialProvider.VaultOpenbao && InterfaceControl.Info?.VaultOpenbaoSecretEngine == VaultOpenbaoSecretEngine.SSHOTP) {
-                            if (!_isPuttyNg) {
-                                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Cannot connect to VaultOpenbao ssh otp without using puttyng to inject authenticator plugin");
-                                return false;
-                            }
-                            arguments.Add("-auth-plugin");
-                            string random = string.Join("", Guid.NewGuid().ToString("n").Take(8));
-                            string pipename = $"mRemoteNGSecretPipe{random}";
-                            arguments.Add($"{App.Info.GeneralAppInfo.HomePath}\\vault-ssh-helper-plugin.exe {username} --pipeName={pipename}");
-                            System.Threading.Tasks.Task.Run(async () => {
-                                using NamedPipeServerStream server = CreatePipeServer(pipename);
-                                var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token;
-                                await server.WaitForConnectionAsync(cts);
-                                using var reader = new StreamReader(server, Utf8NoBom, detectEncodingFromByteOrderMarks: false, bufferSize: 1024, leaveOpen: true);
-                                using var writer = new StreamWriter(server, Utf8NoBom, bufferSize: 1024, leaveOpen: true) { AutoFlush = true };
-                                string? pingMessage = await reader.ReadLineAsync(cts);
-                                if (pingMessage != "ping") throw new FormatException("Invalid ping from VaultOpenbao SSH OTP plugin");
-                                await writer.WriteLineAsync("pong");
-                                string dataRequest = await reader.ReadLineAsync(cts) ?? throw new FormatException("Invalid data request from VaultOpenbao SSH OTP plugin");
-                                var data = DeserializeData(dataRequest);
-                                if (data.Username != username || data.Hostname != InterfaceControl.Info.Hostname || data.Port != InterfaceControl.Info.Port)
-                                    throw new FormatException("Mismatched data request from VaultOpenbao SSH OTP plugin");
-                                await writer.WriteLineAsync(password);
-                            }).ConfigureAwait(false);
-                        }
-
                         // use private key if specified
                         if (!string.IsNullOrEmpty(optionalTemporaryPrivateKeyPath))
                         {
@@ -508,8 +482,7 @@ namespace mRemoteNG.Connection.Protocol
 
         #endregion
 
-        #region VaultOpenbaoUtils
-        private static readonly Encoding Utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+        #region SecretPipe
         private static NamedPipeServerStream CreatePipeServer(string pipeName) {
             var pipeSecurity = new PipeSecurity();
             using var identity = WindowsIdentity.GetCurrent();
@@ -526,17 +499,6 @@ namespace mRemoteNG.Connection.Protocol
                 inBufferSize: 0,
                 outBufferSize: 0,
                 pipeSecurity);
-        }
-        private static (string Username, string Hostname, uint Port) DeserializeData(string data) {
-            var strings = data.Split(':');
-            if (strings.Length != 3) {
-                throw new FormatException("Invalid data format");
-            }
-            return (
-                Encoding.UTF8.GetString(Convert.FromBase64String(strings[0])),
-                Encoding.UTF8.GetString(Convert.FromBase64String(strings[1])),
-                uint.Parse(Encoding.UTF8.GetString(Convert.FromBase64String(strings[2])))
-            );
         }
         #endregion
     }

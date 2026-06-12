@@ -99,9 +99,6 @@
             <Component Id="cmp453A7CFAC82EFE94060420B9EC717B13" Directory="INSTALLDIR" Guid="*">
                 <File Id="fil75E4B7BB134A62C4BBDC1D28A03634C9" KeyPath="yes" Source="$(var.HarvestPath)\ObjectListView.pdb" />
             </Component>
-            <Component Id="cmp3019E4BCFC1F7BFEB026297F494CDC2E" Directory="INSTALLDIR" Guid="*">
-                <File Id="fil797FCFCB5FB0EBD58C78584C7C63BF5A" KeyPath="yes" Source="$(var.HarvestPath)\PuTTYNG.exe" />
-            </Component>
             <Component Id="cmp706223D2ABF6685A8E778D40099041C4" Directory="INSTALLDIR" Guid="*">
                 <File Id="filB19F03244FC8ACDFED93F0A01EDD6A3F" KeyPath="yes" Source="$(var.HarvestPath)\VisualElements_150.png" />
             </Component>

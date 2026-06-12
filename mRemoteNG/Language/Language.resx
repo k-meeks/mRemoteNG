@@ -276,6 +276,15 @@
   <data name="CheckboxPuttyPath" xml:space="preserve">
     <value>Use custom PuTTY path:</value>
   </data>
+  <data name="DownloadPutty" xml:space="preserve">
+    <value>Download official PuTTY</value>
+  </data>
+  <data name="SelectPuttyFolder" xml:space="preserve">
+    <value>Select the folder containing putty.exe</value>
+  </data>
+  <data name="PuttyExeNotFoundInFolder" xml:space="preserve">
+    <value>{0} was not found in the selected folder.</value>
+  </data>
   <data name="CheckboxReconnectWhenReady" xml:space="preserve">
     <value>Reconnect when ready</value>
   </data>
